@@ -28,7 +28,6 @@ def write_messages(sock, username):
         message = input("")
         # When sending a message
         formatted_message = format_message("MSG", username, message)
-        print("client sending formatted message", formatted_message)
         sock.send(formatted_message.encode('utf-8'))
 
 

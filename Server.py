@@ -44,7 +44,6 @@ def broadcast(message, connection, name):
             try:
                 # When broadcasting a message
                 broadcast_message = format_message("MSG",name, message)
-                print("server will broadcast message: ", broadcast_message)
                 client.send(broadcast_message.encode('utf-8'))
             except:
                 client.close()
