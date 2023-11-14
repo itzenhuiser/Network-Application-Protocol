@@ -17,8 +17,8 @@ def receive_messages(sock):
             if message:
                 _ ,mess_to_print = message.split("|")
                 print(mess_to_print)
-        except:
-            print("An error occurred.")
+        except Exception as e:
+            print("An error occurred.", str(e))
             sock.close()
             break
 
