@@ -2,13 +2,22 @@ import socket
 import threading
 
 # Server configuration
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+HOST = '172.17.9.51'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 # Client management
 clients = []
 
+def format_message(message_type, message_body):
+    message_header = f"{message_type}:{len(message_body)}"
+    return f"{message_header}|{message_body}"
+
+
 def client_thread(conn, addr):
+
+    handshake_message = format_message("HSK", "Hello, client")
+    conn.send(handshake_message.encode('utf-8'))
+
     print(f"Connected by {addr}")
     while True:
         try:
@@ -26,7 +35,9 @@ def broadcast(message, connection):
     for client in clients:
         if client != connection:
             try:
-                client.send(message.encode('utf-8'))
+                # When broadcasting a message
+                broadcast_message = format_message("MSG", message)
+                client.send(broadcast_message.encode('utf-8'))
             except:
                 client.close()
                 remove(client)

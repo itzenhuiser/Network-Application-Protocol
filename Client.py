@@ -2,8 +2,13 @@ import socket
 import threading
 
 # Server configuration
-HOST = '127.0.0.1'
+HOST = '172.17.9.51'
 PORT = 65432
+
+def format_message(message_type, message_body):
+    message_header = f"{message_type}:{len(message_body)}"
+    return f"{message_header}|{message_body}"
+
 
 def receive_messages(sock):
     while True:
@@ -19,11 +24,17 @@ def receive_messages(sock):
 def write_messages(sock):
     while True:
         message = input("")
-        sock.send(message.encode('utf-8'))
+        # When sending a message
+        formatted_message = format_message("MSG", message)
+        sock.send(formatted_message.encode('utf-8'))
+
 
 def start_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((HOST, PORT))
+
+    handshake_response = client_socket.recv(1024).decode('utf-8')
+    print(f"Handshake message from server: {handshake_response}")
 
     receive_thread = threading.Thread(target=receive_messages, args=(client_socket,))
     receive_thread.start()
