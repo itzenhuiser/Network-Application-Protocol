@@ -36,6 +36,10 @@ def start_client():
     handshake_response = client_socket.recv(1024).decode('utf-8')
     print(f"Handshake message from server: {handshake_response}")
 
+    screen_name = input("Enter your screen name: ")
+    name_message = format_message("NAME", screen_name)
+    client_socket.send(name_message.encode('utf-8'))
+
     receive_thread = threading.Thread(target=receive_messages, args=(client_socket,))
     receive_thread.start()
 

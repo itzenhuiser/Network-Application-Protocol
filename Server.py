@@ -19,6 +19,11 @@ def client_thread(conn, addr):
     conn.send(handshake_message.encode('utf-8'))
 
     print(f"Connected by {addr}")
+
+    name_msg = conn.recv(1024).decode('utf-8')
+    _, screen_name = name_msg.split("|")
+    broadcast(f"{screen_name} has joined the chat.", conn)
+
     while True:
         try:
             message = conn.recv(1024).decode('utf-8')
@@ -41,6 +46,7 @@ def broadcast(message, connection):
             except:
                 client.close()
                 remove(client)
+                broadcast_message = format_message("MSG","Client " + client + " has disconnected")
 
 def remove(connection):
     if connection in clients:
