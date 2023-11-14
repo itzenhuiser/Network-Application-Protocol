@@ -15,7 +15,8 @@ def receive_messages(sock):
         try:
             message = sock.recv(1024).decode('utf-8')
             if message:
-                print(message)
+                _ ,mess_to_print = message.split("|")
+                print(mess_to_print)
         except:
             print("An error occurred.")
             sock.close()
