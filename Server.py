@@ -31,7 +31,7 @@ def client_thread(conn, addr):
             _,msg_body = message.split("|")
             if message:
                 print(f"{screen_name}: {msg_body}")
-                broadcast(message, conn, name_msg)
+                broadcast(message, conn, screen_name)
             else:
                 remove(conn)
                 break
