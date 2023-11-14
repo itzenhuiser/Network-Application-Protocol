@@ -22,7 +22,7 @@ def client_thread(conn, addr):
     name_msg = conn.recv(1024).decode('utf-8')
     msg_header ,_ = name_msg.split("|")
     _, screen_name ,_ = msg_header.split(":")
-    broadcast(f"{screen_name} has joined the chat", conn, name_msg)
+    broadcast(f"{screen_name} has joined the chat", conn, screen_name)
 
 
     while True:
