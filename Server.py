@@ -21,7 +21,8 @@ def client_thread(conn, addr):
     print(f"Connected by {addr}")
 
     name_msg = conn.recv(1024).decode('utf-8')
-    _, screen_name = name_msg.split("|")
+    msg_header ,_ = name_msg.split("|")
+    _, screen_name ,_ = msg_header.split(":")
     broadcast(f"{screen_name} has joined the chat.", conn)
 
     while True:
