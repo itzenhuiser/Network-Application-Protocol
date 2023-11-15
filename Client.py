@@ -2,7 +2,7 @@ import socket
 import threading
 
 # Server configuration
-HOST = '172.17.9.51'
+HOST = '10.176.17.145'
 PORT = 65432
 
 def format_message(message_type, username, message_body):

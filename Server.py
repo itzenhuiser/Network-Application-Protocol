@@ -2,7 +2,7 @@ import socket
 import threading
 
 # Server configuration
-HOST = '172.17.9.51'  # Standard loopback interface address (localhost)
+HOST = '10.176.17.145'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 # Client management
