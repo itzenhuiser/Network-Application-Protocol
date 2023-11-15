@@ -1,7 +1,6 @@
 import socket
 import threading
 
-# Server configuration
 HOST = '192.168.4.25'
 PORT = 65432
 
@@ -26,7 +25,6 @@ def receive_messages(sock):
 def write_messages(sock, username):
     while True:
         message = input("")
-        # When sending a message
         formatted_message = format_message("MSG", username, message)
         sock.send(formatted_message.encode('utf-8'))
 
@@ -48,5 +46,4 @@ def start_client():
     write_thread = threading.Thread(target=write_messages, args=(client_socket, screen_name))
     write_thread.start()
 
-# Start the client
 start_client()

@@ -1,11 +1,10 @@
 import socket
 import threading
 
-# Server configuration
-HOST = '192.168.4.25'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
-# Client management
+HOST = '192.168.4.25'  
+PORT = 65432        
+
 clients = []
 
 def format_message(message_type, username, message_body):
@@ -42,7 +41,6 @@ def broadcast(message, connection, name):
     for client in clients:
         if client != connection:
             try:
-                # When broadcasting a message
                 broadcast_message = format_message("MSG",name, message)
                 client.send(broadcast_message.encode('utf-8'))
             except:
@@ -55,7 +53,6 @@ def remove(connection):
         clients.remove(connection)
 
 def start_server():
-    # Create a socket object
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((HOST, PORT))
     server_socket.listen()
@@ -68,5 +65,4 @@ def start_server():
         t = threading.Thread(target=client_thread, args=(conn, addr))
         t.start()
 
-# Start the server
 start_server()
