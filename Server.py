@@ -1,9 +1,8 @@
 import socket
 import threading
 
-
-HOST = '192.168.4.25'  
-PORT = 65432        
+HOST = '192.168.4.25'  #IP address of server machine
+PORT = 65432        #Server machine port number to listen on
 
 clients = []
 
@@ -22,7 +21,6 @@ def client_thread(conn, addr):
     msg_header ,_ = name_msg.split("|")
     _, screen_name ,_ = msg_header.split(":")
     broadcast(f"{screen_name} has joined the chat", conn, screen_name)
-
 
     while True:
         try:

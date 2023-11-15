@@ -1,8 +1,8 @@
 import socket
 import threading
 
-HOST = '192.168.4.25'
-PORT = 65432
+HOST = '192.168.4.25'     #Server IP address  
+PORT = 65432              #Server Port Number
 
 def format_message(message_type, username, message_body):
     message_header = f"{message_type}:{username}:{len(message_body)}"
