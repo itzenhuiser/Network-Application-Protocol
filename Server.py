@@ -34,7 +34,6 @@ def client_thread(conn, addr):
                 break
         except:
             remove(conn)
-            #broadcast_message = format_message("MSG", screen_name, f"{screen_name} has disconnected")
             broadcast(f"{screen_name} has disconnected", None , screen_name)
             break
 
@@ -51,6 +50,7 @@ def broadcast(message, connection, name):
 def remove(connection):
     if connection in clients:
         clients.remove(connection)
+        print(f"Disconnected from {connection}")
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
