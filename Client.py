@@ -14,9 +14,13 @@ def receive_messages(sock):
         try:
             message = sock.recv(1024).decode('utf-8')
             if message:
+                print(f"Received message: {message}")  # Add this line for debugging
                 mes_header ,mess_to_print = message.split("|")
                 _, mes_sender, _ = mes_header.split(":")
                 print(mes_sender,":",mess_to_print)
+        except ValueError as ve:
+            print("ValueError occurred:", str(ve))
+            break
         except Exception as e:
             print("An error occurred.", str(e))
             sock.close()

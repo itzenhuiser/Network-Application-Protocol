@@ -33,7 +33,10 @@ def client_thread(conn, addr):
                 remove(conn)
                 break
         except:
-            continue
+            remove(conn)
+            broadcast_message = format_message("MSG", screen_name, f"{screen_name} has disconnected")
+            broadcast(broadcast_message, None , screen_name)
+            break
 
 def broadcast(message, connection, name):
     for client in clients:
@@ -44,8 +47,7 @@ def broadcast(message, connection, name):
             except:
                 client.close()
                 remove(client)
-                broadcast_message = format_message("MSG",name, name + " has disconnected")
-
+                
 def remove(connection):
     if connection in clients:
         clients.remove(connection)
