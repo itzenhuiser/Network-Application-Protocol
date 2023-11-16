@@ -1,7 +1,7 @@
 import socket
 import threading
 
-HOST = '192.168.4.25'  #IP address of server machine
+HOST = '172.17.47.216'  #IP address of server machine
 PORT = 65432        #Server machine port number to listen on
 
 clients = []
