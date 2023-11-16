@@ -38,7 +38,7 @@ def start_client():
 
     handshake_response = client_socket.recv(1024).decode('utf-8')
     _, msg = handshake_response.split('|')
-    print(f"Handshake message from server: {handshake_response}")
+    print(f"Handshake message from server: {msg}")
 
     screen_name = input("Enter your screen name: ")
     name_message = format_message("NAME", screen_name, "")
