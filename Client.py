@@ -14,7 +14,6 @@ def receive_messages(sock):
         try:
             message = sock.recv(1024).decode('utf-8')
             if message:
-                print(f"Received message: {message}")  # Add this line for debugging
                 mes_header ,mess_to_print = message.split("|")
                 _, mes_sender, _ = mes_header.split(":")
                 print(mes_sender,":",mess_to_print)
@@ -38,6 +37,7 @@ def start_client():
     client_socket.connect((HOST, PORT))
 
     handshake_response = client_socket.recv(1024).decode('utf-8')
+    _, msg = handshake_response.split('|')
     print(f"Handshake message from server: {handshake_response}")
 
     screen_name = input("Enter your screen name: ")
